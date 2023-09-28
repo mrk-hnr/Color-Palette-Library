@@ -45,15 +45,16 @@ path, i, svg {
     flex-direction: column;
     position: absolute;
     bottom: 0%;
-    background: rgb(140, 140, 140);
+    background: rgb(255, 255, 255);
     padding: 1rem;
     width: 80%;
     border-top-right-radius: 1rem;
     border-top-left-radius: 1rem;
     pointer-events: none;
+    opacity: 0;
     
     /* Adding adjustment class */
-    /* transform: translateY(100px); */
+    transform: translateY(100px);
     transition: all 0.5s ease-in-out;
 }
 
@@ -108,4 +109,12 @@ path, i, svg {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.adjust, .lock {
+    font-size: 2rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin: 2rem 0;
 }
