@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+
+}
+
+html {
+    /* font-size: 62.5%; */
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Ysabeau Office', sans-serif;
+    color: rgb(51, 51, 51);
+}
+
+path, i, svg {
+     pointer-events: none;  /* Prevents from being clickable*/
+}
+
+.colorS {
+    height: 80vh;
+    display: flex;
+    color: rgb(212, 212, 212);
+}
+
+.color {
+    height: 80vh;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    position: relative;
+    overflow: hidden;
+}
+
+.color h2 {
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.sliders {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0%;
+    background: rgb(140, 140, 140);
+    padding: 1rem;
+    width: 80%;
+    border-top-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    pointer-events: none;
+    
+    /* Adding adjustment class */
+    /* transform: translateY(100px); */
+    transition: all 0.5s ease-in-out;
+}
+
+.sliders.active {
+    opacity: 1;
+    transform: translateY(0px);
+    pointer-events: all;
+}
+
+.sliders button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.5rem;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+}
