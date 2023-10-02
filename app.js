@@ -21,7 +21,6 @@ colorDivs.forEach((div, index) => {
 
 // -------------------------- FUNCTIONS -------------------------- 
 
-// ----------------------------------------------------------
 // Generates Colors
 // function generateHex() {
 //     const letters = "#0123456789ABCDEF" // Characters HEX consists of
@@ -43,9 +42,13 @@ let randomHex = generateHex()
 // ----------------------------------------------------------
 
 function randomColor() {
+    // 
+    initialColor = []
     colorDivs.forEach((div, index) => {
         const hexText = div.children[0]
         const randomColor = generateHex()
+
+        initialColor.push(chroma(randomColor).hex()) // Pushes HEX ID into initialColor as value
 
         // Add color to background
         div.style.backgroundColor = randomColor
@@ -104,7 +107,7 @@ function hslControls(event) {
     const brightness = sliders[1]
     const saturation = sliders[2]
 
-    const bgColor = colorDivs[index].querySelector("h2").innerText
+    const bgColor = initialColor[index]
 
     let color = chroma(bgColor)
         .set("hsl.s", saturation.value)
