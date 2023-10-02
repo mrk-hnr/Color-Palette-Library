@@ -26,7 +26,6 @@ function generateHex() {
 }
 
 
-
 let randomHex = generateHex()
 // ----------------------------------------------------------
 
@@ -38,8 +37,22 @@ function randomColor() {
         // Add color to background
         div.style.backgroundColor = randomColor
         hexText.innerText = randomColor
+
+        // Checks contrast
+        textContrast(randomColor, hexText) 
     })
 }
 
-randomColor()
+// ----------------------------------------------------------
+function textContrast(color, text) {
+    const luminance = chroma(color).luminance()
 
+    if (luminance > .5) {     
+        text.style.color = "black"
+    } else {
+        text.style.color = "white"
+    }
+}
+
+randomColor()
+textContrast()
