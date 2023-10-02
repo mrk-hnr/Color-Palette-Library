@@ -10,15 +10,21 @@ let initialColor;
 
 // ----------------------------------------------------------
 // Generates Colors
-function generateHex() {
-    const letters = "#0123456789ABCDEF" // Characters HEX consists of
-    let hash = "#" // HEX colors always starts with #
+// function generateHex() {
+//     const letters = "#0123456789ABCDEF" // Characters HEX consists of
+//     let hash = "#" // HEX colors always starts with #
     
-    for (let i = 0; i < 6; i++) { // HEX colors are 6 characters long, excluding #
-        hash += letters[Math.floor(Math.random() * 16)] //Randomly chooses 1 character from letters until it meets 6 characters long, w/c is added in hash
-    }
-    return hash
+//     for (let i = 0; i < 6; i++) { // HEX colors are 6 characters long, excluding #
+//         hash += letters[Math.floor(Math.random() * 16)] //Randomly chooses 1 character from letters until it meets 6 characters long, w/c is added in hash
+//     }
+//     return hash
+// }
+
+function generateHex() {
+    const hexColor = chroma.random()
+    return hexColor
 }
+
 
 
 let randomHex = generateHex()
