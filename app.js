@@ -66,7 +66,10 @@ function randomColor() {
 
         colorSlider(color, hue, brightness, saturation)
     })
+    // reset slider
+    resetInputs()
 }
+
 
 // ----------------------------------------------------------
 function textContrast(color, text) {
@@ -132,9 +135,33 @@ function updateTextUI(index) {
     }
 }
 
+function resetInputs() {
+    const sliders = document.querySelectorAll(".sliders input")
+
+    sliders.forEach(slider => {
+        if (slider.name === "hue") {
+            const hueColor = initialColor[slider.getAttribute("data-hue")]
+            const hueValue = chroma(hueColor).hsl()[0]
+            slider.value = Math.floor(hueValue)            
+        }
+
+        if (slider.name === "saturation") {
+            const satColor = initialColor[slider.getAttribute("data-sat")]
+            const satValue = chroma(satColor).hsl()[1]
+            slider.value = Math.floor(satValue * 100) / 100
+        }
+
+        if (slider.name === "brightness") {
+            const brightColor = initialColor[slider.getAttribute("data-bright")]
+            const brightValue = chroma(brightColor).hsl()[2]
+            slider.value = Math.floor(brightValue * 100) / 100            
+        }
+    })
+}
+
+
 
 
 
 randomColor()
-textContrast()
-colorSlider()
+// colorSlider()
