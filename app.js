@@ -40,6 +40,15 @@ function randomColor() {
 
         // Checks contrast
         textContrast(randomColor, hexText) 
+
+        // Initial Color Slider
+        const color = chroma(randomColor)
+        const sliders = div.querySelectorAll(".sliders input")
+        const hue = sliders[0]
+        const brightness = sliders[1]
+        const saturation = sliders[2]
+
+        colorSlider(color, hue, brightness, saturation)
     })
 }
 
@@ -54,5 +63,29 @@ function textContrast(color, text) {
     }
 }
 
+// ----------------------------------------------------------
+
+function colorSlider(color, hue, brightness, saturation) {
+    // Scaling Saturation
+    const noSat = color.set("hsl.s", 0)
+    const maxSat = color.set("hsl.s", 1)
+    const scaleSat = chroma.scale([noSat, color, maxSat])
+
+    // Scaling Brightness
+
+    const midBright = color.set("hsl.l", 0.5)
+    const scaleBright = chroma.scale(["black", midBright, "white"])
+    
+
+    // Colors in Slider Output
+    saturation.style.backgroundImage = `linear-gradient(to right, ${scaleSat(0)}, ${scaleSat(1)})`
+    brightness.style.backgroundImage = `linear-gradient(to right, ${scaleBright(0)}, ${scaleBright(0.5)} , ${scaleBright(1)})`
+    hue.style.backgroundImage = `linear-gradient(to right, rgb(204, 75 , 75), rgb(204, 204, 7), rgb(75, 204, 75), rgb(75, 204, 204), rgb(75, 75, 204), rgb(204, 75, 204), rgb(204, 75, 75))` // bruuh!
+}
+
+
+
+
 randomColor()
 textContrast()
+colorSlider()
