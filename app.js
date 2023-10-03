@@ -3,6 +3,7 @@ const colorDivs = document.querySelectorAll(".color")
 const generateButton = document.querySelectorAll(".generate")
 const sliders = document.querySelectorAll(`input[type="range"]`)
 const currentHex = document.querySelectorAll(".color h2")
+const popup = document.querySelector(".copy-container")
 
 let initialColor;
 
@@ -16,6 +17,18 @@ colorDivs.forEach((div, index) => {
     div.addEventListener("change", () => {
         updateTextUI(index)
     })
+})
+
+currentHex.forEach(hex => {
+    hex.addEventListener("click", () => {
+        copyToClip(hex)
+    })
+})
+
+popup.addEventListener("transitionend", () => {
+    const popUpMSG = popup.children[0]
+    popup.classList.remove("active")
+    popUpMSG.classList.remove("active")
 })
 
 
@@ -165,7 +178,19 @@ function resetInputs() {
     })
 }
 
+function copyToClip(hex) {
+    const element = document.createElement("textarea")
+    element.value = hex.innerText
+    document.body.appendChild(element)
+    element.select()
+    document.execCommand("copy")
+    document.body.removeChild(element)
 
+    // Activate pop up when color is copied
+    const popUpMSG = popup.children[0]
+    popup.classList.add("active")
+    popUpMSG.classList.add("active")
+}
 
 
 
