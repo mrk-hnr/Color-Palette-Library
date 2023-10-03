@@ -50,6 +50,12 @@ closeAdjustButton.forEach((button, index) => {
     })
 })
 
+lockButton.forEach((button, index) => {
+    button.addEventListener("click", event => {
+      lockLayer(event, index);
+    })
+  })
+
 // -------------------------- FUNCTIONS -------------------------- 
 
 // Generates Colors
@@ -78,7 +84,19 @@ function randomColor() {
         const hexText = div.children[0]
         const randomColor = generateHex()
 
-        initialColor.push(chroma(randomColor).hex()) // Pushes HEX ID into initialColor as value
+        if (div.classList.contains("locked")) {
+            initialColor.push(hexText.innerText);
+            return;
+          } else {
+            initialColor.push(chroma(randomColor).hex());
+          }
+
+        // if (div.classList.contains("lock")) {
+        //     initialColor.push(hexText.innerText)
+            
+        // } else {
+        //     initialColor.push(chroma(randomColor).hex()) // Pushes HEX ID into initialColor as value
+        // }
 
         // Add color to background
         div.style.backgroundColor = randomColor
@@ -120,8 +138,6 @@ function textContrast(color, text) {
 
 // ----------------------------------------------------------
 
-// ----------------------------------------------------------
-
 function colorSlider(color, hue, brightness, saturation) {
     // Scaling Saturation
     const noSat = color.set("hsl.s", 0)
@@ -139,6 +155,8 @@ function colorSlider(color, hue, brightness, saturation) {
     brightness.style.backgroundImage = `linear-gradient(to right, ${scaleBright(0)}, ${scaleBright(0.5)} , ${scaleBright(1)})`
     hue.style.backgroundImage = `linear-gradient(to right, rgb(204, 75 , 75), rgb(204, 204, 7), rgb(75, 204, 75), rgb(75, 204, 204), rgb(75, 75, 204), rgb(204, 75, 204), rgb(204, 75, 75))` // bruuh!
 }
+
+// ----------------------------------------------------------
 
 function hslControls(event) {
     const index = event.target.getAttribute("data-bright") || event.target.getAttribute("data-sat") || event.target.getAttribute("data-hue")
@@ -162,6 +180,8 @@ function hslControls(event) {
 
 }
 
+// ----------------------------------------------------------
+
 function updateTextUI(index) {
     const activeDiv = colorDivs[index]
     const color = chroma(activeDiv.style.backgroundColor)
@@ -176,6 +196,8 @@ function updateTextUI(index) {
         textContrast(color, icon)
     }
 }
+
+// ----------------------------------------------------------
 
 function resetInputs() {
     const sliders = document.querySelectorAll(".sliders input")
@@ -201,6 +223,8 @@ function resetInputs() {
     })
 }
 
+// ----------------------------------------------------------
+
 function copyToClip(hex) {
     const element = document.createElement("textarea")
     element.value = hex.innerText
@@ -215,6 +239,8 @@ function copyToClip(hex) {
     popUpMSG.classList.add("active")
 }
 
+// ----------------------------------------------------------
+
 function openAdjustmentPanel(index) {
     sliderContainer[index].classList.toggle("active")
 }
@@ -222,6 +248,19 @@ function closeAdjustmentPanel(index) {
     sliderContainer[index].classList.remove("active")
 }
 
+// ----------------------------------------------------------
+
+function lockLayer(event, index) {
+    const lockSVG = event.target.children[0];
+    const activeBg = colorDivs[index];
+    activeBg.classList.toggle("locked");
+  
+    if (lockSVG.classList.contains("fa-lock-open")) {
+        event.target.innerHTML = '<i class="fas fa-lock"></i>';
+    } else {
+        event.target.innerHTML = '<i class="fas fa-lock-open"></i>';
+    }
+  }
 
 
 randomColor()
