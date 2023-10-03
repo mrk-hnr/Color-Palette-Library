@@ -4,6 +4,9 @@ const generateButton = document.querySelectorAll(".generate")
 const sliders = document.querySelectorAll(`input[type="range"]`)
 const currentHex = document.querySelectorAll(".color h2")
 const popup = document.querySelector(".copy-container")
+const adjustButton = document.querySelectorAll(".adjust")
+const closeAdjustButton = document.querySelectorAll(".button-close-adjustment")
+const sliderContainer = document.querySelectorAll(".sliders")
 
 let initialColor;
 
@@ -30,6 +33,19 @@ popup.addEventListener("transitionend", () => {
     popup.classList.remove("active")
     popUpMSG.classList.remove("active")
 })
+
+adjustButton.forEach((button, index) => {
+    button.addEventListener("click", () => {
+        openAdjustmentPanel(index)
+    })
+})
+
+closeAdjustButton.forEach((button, index) => {
+    button.addEventListener("click", () => {
+        closeAdjustmentPanel(index)
+    })
+})
+
 
 
 // -------------------------- FUNCTIONS -------------------------- 
@@ -190,6 +206,13 @@ function copyToClip(hex) {
     const popUpMSG = popup.children[0]
     popup.classList.add("active")
     popUpMSG.classList.add("active")
+}
+
+function openAdjustmentPanel(index) {
+    sliderContainer[index].classList.toggle("active")
+}
+function closeAdjustmentPanel(index) {
+    sliderContainer[index].classList.remove("active")
 }
 
 
