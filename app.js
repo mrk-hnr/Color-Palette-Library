@@ -1,10 +1,11 @@
 // -------------------------- GLOBAL VARIABLES/SELECTIONS -------------------------- 
 const colorDivs = document.querySelectorAll(".color")
-const generateButton = document.querySelectorAll(".generate")
+const generateButton = document.querySelector(".generate")
 const sliders = document.querySelectorAll(`input[type="range"]`)
 const currentHex = document.querySelectorAll(".color h2")
 const popup = document.querySelector(".copy-container")
 const adjustButton = document.querySelectorAll(".adjust")
+const lockButton = document.querySelectorAll(".lock")
 const closeAdjustButton = document.querySelectorAll(".button-close-adjustment")
 const sliderContainer = document.querySelectorAll(".sliders")
 
@@ -12,6 +13,9 @@ let initialColor;
 
 
 // -------------------------- EVENT LISTENERS --------------------------
+
+
+
 sliders.forEach(slider => {
     slider.addEventListener("input", hslControls)
 })
@@ -46,8 +50,6 @@ closeAdjustButton.forEach((button, index) => {
     })
 })
 
-
-
 // -------------------------- FUNCTIONS -------------------------- 
 
 // Generates Colors
@@ -66,13 +68,12 @@ function generateHex() {
     return hexColor
 }
 
-
 let randomHex = generateHex()
 // ----------------------------------------------------------
 
 function randomColor() {
-    // 
     initialColor = []
+    
     colorDivs.forEach((div, index) => {
         const hexText = div.children[0]
         const randomColor = generateHex()
@@ -95,8 +96,14 @@ function randomColor() {
 
         colorSlider(color, hue, brightness, saturation)
     })
-    // reset slider
+    // Reset slider
     resetInputs()
+
+    // Validates Button Contrast
+    adjustButton.forEach((button, index) => {
+        textContrast(initialColor[index], button)
+        textContrast(initialColor[index], lockButton[index])
+    })
 }
 
 
