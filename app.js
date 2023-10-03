@@ -84,6 +84,8 @@ function textContrast(color, text) {
 
 // ----------------------------------------------------------
 
+// ----------------------------------------------------------
+
 function colorSlider(color, hue, brightness, saturation) {
     // Scaling Saturation
     const noSat = color.set("hsl.s", 0)
@@ -118,6 +120,10 @@ function hslControls(event) {
         .set("hsl.h", hue.value)
 
         colorDivs[index].style.backgroundColor = color
+
+        // Colorize sliders
+        colorSlider(color, hue, brightness, saturation)
+
 }
 
 function updateTextUI(index) {
