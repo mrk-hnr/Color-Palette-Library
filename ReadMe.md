@@ -8,7 +8,7 @@ A simple web app that saves up to 5 colors.
 
 Allow users to save up to 5 individual colors. <br> It is very useful when a user has a goto colors that they always use.
 
-Features: **Library, Generate, Save**. <br>
+Features: **HSL Slider, Lock, Library, Generate, Save**. <br>
 **_HSL Slider_** - Allows user to manipulate the HSL value of a selected color. <br>
 **_Lock_** - It prevents the color from changing when the Generate button is clicked. <br>
 **_Library_** - All saved color palette will be shown from the Library prompt, allowing users to select one of their saved palettes. <br>
