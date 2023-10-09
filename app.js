@@ -279,6 +279,8 @@ const closeLibraryButton = document.querySelector(".close-library")
 saveButton.addEventListener("click", openPalette)
 closeSave.addEventListener("click", closePalette)
 submitSave.addEventListener("click", savePalette)
+libraryButton.addEventListener("click", openLibrary)
+closeLibraryButton.addEventListener("click", closeLibrary)
 
 function openPalette(event) {
     const popup = saveContainer.children[0]
@@ -348,7 +350,17 @@ function savetoLocalStorage(paletteObject) {
     localStorage.setItem("palettes", JSON.stringify(localPalette))
 }
 
+function openLibrary() {
+    const popup = libraryContainer.children[0]
+    libraryContainer.classList.add("active")
+    popup.classList.add("active")
+}
 
+function closeLibrary() {
+    const popup = libraryContainer.children[0]
+    libraryContainer.classList.remove("active")
+    popup.classList.remove("active")
+}
 
 
 
