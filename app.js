@@ -272,6 +272,9 @@ const submitSave = document.querySelector(".submit-save")
 const closeSave = document.querySelector(".close-save")
 const saveContainer = document.querySelector(".save-container")
 const saveInput = document.querySelector(".save-container input")
+const libraryContainer = document.querySelector(".library-container")
+const libraryButton = document.querySelector(".library")
+const closeLibraryButton = document.querySelector(".close-library")
 
 saveButton.addEventListener("click", openPalette)
 closeSave.addEventListener("click", closePalette)
@@ -305,6 +308,34 @@ function savePalette(event) {
     // Save to Local Storage
     savetoLocalStorage(paletteObject)
     saveInput.value = ""
+
+    // Retrieve from LocalStorage
+    const palette = document.createElement("div")
+    const title = document.createElement("h4")
+    const preview = document.createElement("div")
+    palette.classList.add("custom-palette")
+    title.innerText = paletteObject.name
+    preview.classList.add("small-preview")
+    
+    paletteObject.colors.forEach(smallColor => {
+        const smallDiv = document.createElement("div")
+        smallDiv.style.backgroundColor = smallColor
+        preview.appendChild(smallDiv)
+    })
+
+    const paletteButton = document.createElement("button")
+    paletteButton.classList.add("pick-paletteButton")
+    paletteButton.classList(paletteObject.number)
+    paletteButton.innerText = "Select"
+
+    // Append to Library/DOM
+    palette.appendChild(title)
+    palette.appendChild(preview)
+    palette.appendChild(paletteButton)
+    libraryContainer.children[0].appendChild(palette)
+    
+
+    
 }
 
 function savetoLocalStorage(paletteObject) {
@@ -318,6 +349,9 @@ function savetoLocalStorage(paletteObject) {
     localPalette.push(paletteObject)
     localStorage.setItem("palettes", JSON.stringify(localPalette))
 }
+
+
+
 
 
 
