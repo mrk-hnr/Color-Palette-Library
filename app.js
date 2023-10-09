@@ -10,6 +10,9 @@ const closeAdjustButton = document.querySelectorAll(".button-close-adjustment")
 const sliderContainer = document.querySelectorAll(".sliders")
 
 let initialColor;
+// -------------------------- LOCAL STORAGE --------------------------
+let savedPalette = []
+
 
 
 // -------------------------- EVENT LISTENERS --------------------------
@@ -261,6 +264,30 @@ function lockLayer(event, index) {
         event.target.innerHTML = '<i class="fas fa-lock-open"></i>';
     }
   }
+
+
+// -------------------------- Implement "Save to Palette" and Local Storage Stuff --------------------------
+const saveButton = document.querySelector(".save")
+const submitSave = document.querySelector(".submit-save")
+const closeSave = document.querySelector(".close-save")
+const saveContainer = document.querySelector(".save-container")
+const saveInput = document.querySelector(".save-container input")
+
+saveButton.addEventListener("click", openPalette)
+closeSave.addEventListener("click", closePalette)
+
+function openPalette() {
+    const popup = saveContainer.children[0]
+    saveContainer.classList.add("active")
+    popup.classList.add("active")
+}
+
+function closePalette() {
+    const popup = saveContainer.children[0]
+    saveContainer.classList.remove("active")
+    popup.classList.remove("active")
+}
+
 
 
 randomColor()
