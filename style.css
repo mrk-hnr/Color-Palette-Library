@@ -200,3 +200,43 @@ input[type="range"] {
     font-size: 1.5rem;
     padding: 1rem;
 }
+
+.library-popup {
+    min-width: 40%;
+    max-height: 50vh;
+    padding: 1rem;
+    justify-content: flex-start;
+    overflow-y: scroll;
+}
+
+.custom-palette {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 2rem;
+}
+
+.small-preview {
+    display: flex;
+    flex: 1;
+}
+
+.custom-palette h4 {
+    flex: 1;
+    
+}
+
+.small-preview div {
+    height: 5rem;
+    flex: 1;
+}
+
+.pick-paletteButton {
+    height: 5rem;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    background-color: rgb(49, 49, 49);
+    color: white;
+}
