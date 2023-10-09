@@ -340,6 +340,9 @@ function savePalette(event) {
             initialColors.push(color)
             colorDivs[index].style.backgroundColor = color
             const text = colorDivs[index].children[0]
+            textContrast(color, text)
+            updateTextUI(index)
+            
         })
     })
 
