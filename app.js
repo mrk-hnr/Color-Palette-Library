@@ -327,15 +327,27 @@ function savePalette(event) {
 
     const paletteButton = document.createElement("button")
     paletteButton.classList.add("pick-paletteButton")
-    paletteButton.classList(paletteObject.number)
+    paletteButton.classList.add(paletteObject.number)
     paletteButton.innerText = "Select"
+
+    // Attach event to button
+
+    paletteButton.addEventListener("click", event => {
+        closeLibrary()
+        const paletteIndex = event.target.classList[1]
+        initialColors = []
+        savedPalette[paletteIndex].colors.forEach((color, index) => {
+            initialColors.push(color)
+            colorDivs[index].style.backgroundColor = color
+            const text = colorDivs[index].children[0]
+        })
+    })
 
     // Append to Library/DOM
     palette.appendChild(title)
     palette.appendChild(preview)
     palette.appendChild(paletteButton)
     libraryContainer.children[0].appendChild(palette)
-    
 }
 
 function savetoLocalStorage(paletteObject) {
