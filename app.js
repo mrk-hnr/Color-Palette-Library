@@ -334,8 +334,6 @@ function savePalette(event) {
     palette.appendChild(paletteButton)
     libraryContainer.children[0].appendChild(palette)
     
-
-    
 }
 
 function savetoLocalStorage(paletteObject) {
@@ -349,6 +347,7 @@ function savetoLocalStorage(paletteObject) {
     localPalette.push(paletteObject)
     localStorage.setItem("palettes", JSON.stringify(localPalette))
 }
+
 
 
 
