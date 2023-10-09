@@ -341,9 +341,9 @@ function savePalette(event) {
             colorDivs[index].style.backgroundColor = color
             const text = colorDivs[index].children[0]
             textContrast(color, text)
-            updateTextUI(index)
-            
+            updateTextUI(index)            
         })
+        resetInputs()
     })
 
     // Append to Library/DOM
@@ -377,9 +377,58 @@ function closeLibrary() {
     popup.classList.remove("active")
 }
 
+function getLocal() {
+    if (localStorage.getItem("palettes") === null) {
+        localStorage = []
+    } else {
+        const paletteObj = JSON.parse(localStorage.getItem("palettes"))
+        paletteObj.forEach(paletteObject => {
+
+                // Retrieve from LocalStorage
+    const palette = document.createElement("div")
+    const title = document.createElement("h4")
+    const preview = document.createElement("div")
+    palette.classList.add("custom-palette")
+    title.innerText = paletteObject.name
+    preview.classList.add("small-preview")
+    
+    paletteObject.colors.forEach(smallColor => {
+        const smallDiv = document.createElement("div")
+        smallDiv.style.backgroundColor = smallColor
+        preview.appendChild(smallDiv)
+    })
+
+    const paletteButton = document.createElement("button")
+    paletteButton.classList.add("pick-paletteButton")
+    paletteButton.classList.add(paletteObject.number)
+    paletteButton.innerText = "Select"
+
+    // Attach event to button
+
+    paletteButton.addEventListener("click", event => {
+        closeLibrary()
+        const paletteIndex = event.target.classList[1]
+        initialColor = []
+        paletteObj[paletteIndex].colors.forEach((color, index) => {
+            initialColor.push(color)
+            colorDivs[index].style.backgroundColor = color
+            const text = colorDivs[index].children[0]
+            textContrast(color, text)
+            updateTextUI(index)            
+        })
+        resetInputs()
+    })
+
+    // Append to Library/DOM
+    palette.appendChild(title)
+    palette.appendChild(preview)
+    palette.appendChild(paletteButton)
+    libraryContainer.children[0].appendChild(palette)
+        })
+    }
+}
 
 
-
-
+getLocal()
 randomColor()
 // colorSlider()
