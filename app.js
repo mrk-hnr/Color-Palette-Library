@@ -275,17 +275,48 @@ const saveInput = document.querySelector(".save-container input")
 
 saveButton.addEventListener("click", openPalette)
 closeSave.addEventListener("click", closePalette)
+submitSave.addEventListener("click", savePalette)
 
-function openPalette() {
+function openPalette(event) {
     const popup = saveContainer.children[0]
     saveContainer.classList.add("active")
     popup.classList.add("active")
 }
 
-function closePalette() {
+function closePalette(event) {
     const popup = saveContainer.children[0]
     saveContainer.classList.remove("active")
     popup.classList.remove("active")
+}
+
+function savePalette(event) {
+    saveContainer.classList.remove("active")
+    popup.classList.remove("active")
+    const name = saveInput.value
+    const colors = []
+    currentHex.forEach(hex => {
+        colors.push(hex.innerText)
+    })
+    // Generate Object
+    let paletteNumber = savedPalette.length
+    const paletteObject = {name, colors, number: paletteNumber}
+    savedPalette.push(paletteObject)
+     
+    // Save to Local Storage
+    savetoLocalStorage(paletteObject)
+    saveInput.value = ""
+}
+
+function savetoLocalStorage(paletteObject) {
+    let localPalette
+    
+    if (localStorage.getItem("palettes") === null) {
+        localPalette = []
+    } else {
+        localPalette = JSON.parse(localStorage.getItem("palettes"))
+    }
+    localPalette.push(paletteObject)
+    localStorage.setItem("palettes", JSON.stringify(localPalette))
 }
 
 
